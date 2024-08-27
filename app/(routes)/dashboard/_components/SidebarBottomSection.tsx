@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dialog";
 
 import { Input } from "@/components/ui/input";
+import Constant from "@/app/_constants/Constant";
+import PricingDialog from "./PricingDialog";
 
 interface SidebarBottomSectionProps {
   createNewFile: (filename: string) => void;
@@ -66,37 +68,41 @@ const SidebarBottomSection: React.FC<SidebarBottomSectionProps> = ({
             New File
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Create new file</DialogTitle>
-          </DialogHeader>
-          <div className="flex items-center space-x-2">
-            <div className="grid flex-1 gap-2">
-              <Input
-                id="link"
-                onChange={(e) => setFileName(e.target.value)}
-                value={fileName}
-                className="mt-2"
-                placeholder="Enter file name"
-              />
+        {numberOfFiles < Constant.MAX_FREE_FILE ? (
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Create new file</DialogTitle>
+            </DialogHeader>
+            <div className="flex items-center space-x-2">
+              <div className="grid flex-1 gap-2">
+                <Input
+                  id="link"
+                  onChange={(e) => setFileName(e.target.value)}
+                  value={fileName}
+                  className="mt-2"
+                  placeholder="Enter file name"
+                />
+              </div>
             </div>
-          </div>
-          <DialogFooter className="">
-            <DialogClose asChild>
-              <Button
-                type="button"
-                disabled={fileName.length < 3}
-                className="bg-blue-500 mt-2 flex flex-end"
-                onClick={() => {
-                  createNewFile(fileName);
-                  setFileName("");
-                }}
-              >
-                Create
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
+            <DialogFooter className="">
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  disabled={fileName.length < 3}
+                  className="bg-blue-500 mt-2 flex flex-end"
+                  onClick={() => {
+                    createNewFile(fileName);
+                    setFileName("");
+                  }}
+                >
+                  Create
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        ) : (
+          <PricingDialog />
+        )}
       </Dialog>
 
       <div className="mt-4 h-4 w-full bg-slate-800 rounded-lg">
@@ -107,7 +113,8 @@ const SidebarBottomSection: React.FC<SidebarBottomSectionProps> = ({
       </div>
 
       <h2 className="text-[12px] mt-3">
-        <strong>{numberOfFiles}</strong> out of <strong>5</strong> files used
+        <strong>{numberOfFiles}</strong> out of{" "}
+        <strong>{Constant.MAX_FREE_FILE}</strong> files used
       </h2>
       <h2 className="text-[12px] mt-1">Upgrade your plan</h2>
     </div>

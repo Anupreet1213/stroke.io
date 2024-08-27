@@ -1,20 +1,20 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import {
   LogoutLink,
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
-import { useConvex, useMutation } from "convex/react";
+import { useConvex, useMutation, useQuery } from "convex/react";
 import React, { useEffect } from "react";
+import Header from "./_components/Header";
+import FileList from "./_components/FileList";
 
 const Dashboard = () => {
   const { user }: any = useKindeBrowserClient();
   const convex = useConvex();
 
   const createUser = useMutation(api.user.addUser);
-
   useEffect(() => {
     if (user) {
       checkUser();
@@ -35,11 +35,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      {/* <p>Dashboard</p>
-      <Button>
-        <LogoutLink>Logout</LogoutLink>
-      </Button> */}
+    <div className="p-6">
+      <Header />
+      <FileList />
     </div>
   );
 };
