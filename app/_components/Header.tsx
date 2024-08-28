@@ -1,6 +1,13 @@
-import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
+import {
+  LoginLink,
+  LogoutLink,
+  RegisterLink,
+  useKindeBrowserClient,
+} from "@kinde-oss/kinde-auth-nextjs";
 
 const Header = () => {
+  const { user } = useKindeBrowserClient();
+
   return (
     <header className="bg-black">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -29,40 +36,30 @@ const Header = () => {
               <li>
                 <a
                   className="text-white transition hover:text-gray-200/75"
-                  href="#"
+                  href="https://anupreet-portfolio.netlify.app/"
                 >
                   {" "}
-                  About{" "}
+                  Author{" "}
                 </a>
               </li>
 
               <li>
                 <a
                   className="text-white transition hover:text-gray-200/75"
-                  href="#"
+                  href="https://github.com/Anupreet1213"
                 >
                   {" "}
-                  Careers{" "}
+                  Github{" "}
                 </a>
               </li>
 
               <li>
                 <a
                   className="text-white transition hover:text-gray-200/75"
-                  href="#"
+                  href="https://www.linkedin.com/in/anupreet-srivastava-973013223/"
                 >
                   {" "}
-                  History{" "}
-                </a>
-              </li>
-
-              <li>
-                <a
-                  className="text-white transition hover:text-gray-200/75"
-                  href="#"
-                >
-                  {" "}
-                  Services{" "}
+                  LinkedIn{" "}
                 </a>
               </li>
 
@@ -89,15 +86,29 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4">
-              <a className="block rounded-md  px-5 py-2.5 text-sm font-medium text-white transition ">
-                <LoginLink postLoginRedirectURL="/dashboard">Login</LoginLink>
-              </a>
+            {!user ? (
+              <div className="sm:flex sm:gap-4">
+                <a className="block rounded-md  px-5 py-2.5 text-sm font-medium text-white transition ">
+                  <LoginLink postLoginRedirectURL="/dashboard">Login</LoginLink>
+                </a>
 
-              <a className="hidden rounded-md bg-white text-black px-5 py-2.5 text-sm font-medium transition hover:opacity-90 sm:block">
-                <RegisterLink>Register</RegisterLink>
-              </a>
-            </div>
+                <a className="hidden rounded-md bg-white text-black px-5 py-2.5 text-sm font-medium transition hover:opacity-90 sm:block">
+                  <RegisterLink>Register</RegisterLink>
+                </a>
+              </div>
+            ) : (
+              <div className="sm:flex sm:gap-4">
+                <a className="block rounded-md  px-5 py-2.5 text-sm font-medium text-white transition ">
+                  <LoginLink postLoginRedirectURL="/dashboard">
+                    Dashboard
+                  </LoginLink>
+                </a>
+
+                <a className="hidden rounded-md bg-white text-black px-5 py-2.5 text-sm font-medium transition hover:opacity-90 sm:block">
+                  <LogoutLink>Logout</LogoutLink>
+                </a>
+              </div>
+            )}
 
             <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
               <span className="sr-only">Toggle menu</span>

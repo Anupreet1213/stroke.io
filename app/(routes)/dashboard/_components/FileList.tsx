@@ -49,7 +49,7 @@ const FileList = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-            {fileListLocal &&
+            {fileListLocal.length > 0 ? (
               fileListLocal.map((eachFile: File) => (
                 <tr
                   key={eachFile?._id}
@@ -87,7 +87,17 @@ const FileList = () => {
                     </DropdownMenu>
                   </td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr className="odd:bg-gray-50 dark:odd:bg-gray-800/50">
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                  No Files Created
+                </td>
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"></td>
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"></td>
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"></td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
