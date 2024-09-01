@@ -28,7 +28,7 @@ const Canvas = ({ onSaveTrigger, fileData, fileId }: CanvasProps) => {
   console.log(fileData);
 
   return (
-    <div className="h-[720px]">
+    <div className="h-[90vh]">
       {fileData && (
         <Excalidraw
           onChange={(excalidrawElements, appState, files) =>
