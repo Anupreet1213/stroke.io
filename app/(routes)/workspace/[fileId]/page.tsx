@@ -27,7 +27,7 @@ const Workspace = ({ params }: any) => {
   };
 
   return (
-    <div className="bg-hero-pattern bg-cover h-screen">
+    <div className="bg-hero-pattern bg-cover">
       <WorkspaceHeader
         onSave={() => settriggerSave(Date.now())}
         setHandleSwitch={setHandleSwitch}
