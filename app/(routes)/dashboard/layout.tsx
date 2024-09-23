@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   }, []);
 
   const checkTeam = async () => {
-    const result = await convex.query(api.teams.getTeams, {
+    const result = await convex.query(api.teams.getTeam, {
       email: user?.email,
     });
     if (!result.length) {
