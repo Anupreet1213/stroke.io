@@ -40,7 +40,7 @@ const CreateTeam = () => {
             d="M891.3,0L1646,0c38.8,0,62.8,55,42.7,98.2L1443,628.9c-9,19.5-25.2,31.4-42.7,31.4h-509V0z"
           ></path>
         </svg>
-        <span className="text-lg md:text-2xl font-bold ">scribble.io</span>
+        <span className="text-lg md:text-2xl font-bold ">stroke.io</span>
       </div>
 
       <div className="flex flex-col items-center px-6">
